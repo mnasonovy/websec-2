@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание Самарского университета</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <header class="hero-header">
+        <div class="hero-space-layer"></div>
+        <div class="container hero-content">
+            <div class="hero-brand">
+                <div class="hero-logo" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" class="hero-logo-svg">
+                        <path d="M41 10c-8 0-13 4-13 10 0 5 3 8 9 10l5 2c4 1 6 3 6 6 0 4-3 7-9 7-5 0-9-2-13-6l-5 5c5 5 11 8 19 8 11 0 18-6 18-15 0-7-4-11-12-14l-5-2c-3-1-4-2-4-4 0-3 3-5 8-5 4 0 7 1 10 4l5-5c-4-4-9-7-19-7z" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M23 54c8 0 13-4 13-10 0-5-3-8-9-10l-5-2c-4-1-6-3-6-6 0-4 3-7 9-7 5 0 9 2 13 6l5-5c-5-5-11-8-19-8-11 0-18 6-18 15 0 7 4 11 12 14l5 2c3 1 4 2 4 4 0 3-3 5-8 5-4 0-7-1-10-4l-5 5c4 4 9 7 19 7z" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+
+                <div class="hero-text">
+                    <h1>Расписание Самарского университета</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell container">
+        <section class="group-info-card cosmic-card" id="info-card">
+            <div class="card-top-line">
+                <div class="legend-badges">
+                    <span class="legend-badge lecture">● ЛЕКЦИЯ</span>
+                    <span class="legend-badge practice">● ПРАКТИКА</span>
+                    <span class="legend-badge lab">● ЛАБОРАТОРНАЯ</span>
+                    <span class="legend-badge exam">● ЭКЗАМЕН</span>
+                    <span class="legend-badge credit">● ЗАЧЁТ</span>
+                    <span class="legend-badge consult">● КОНСУЛЬТАЦИЯ</span>
+                    <span class="legend-badge other">● ДРУГОЕ</span>
+                </div>
+            </div>
+
+            <div class="toolbar-line">
+                <div class="toolbar-group">
+                    <label for="mode">Режим</label>
+                    <select id="mode">
+                        <option value="group">По группе</option>
+                        <option value="teacher">По преподавателю</option>
+                    </select>
+                </div>
+
+                <div class="toolbar-group" id="group-block">
+                    <label for="group-select">Группа</label>
+                    <select id="group-select"></select>
+                </div>
+
+                <div class="toolbar-group hidden" id="teacher-block">
+                    <label for="teacher-select">Преподаватель</label>
+                    <select id="teacher-select"></select>
+                </div>
+
+                <div class="toolbar-group search-group">
+                    <label for="search-input">Поиск</label>
+                    <input type="text" id="search-input" placeholder="Предмет, преподаватель, аудитория">
+                </div>
+            </div>
+
+            <div class="info-main-line">
+                <div class="group-info-main">
+                    <div class="group-title" id="info-entity-title">6413-100503D</div>
+                    <div class="group-program" id="info-program">10.05.03 Информационная безопасность автоматизированных систем</div>
+                    <div class="group-form" id="info-form">Специалист (Очная форма обучения)</div>
+                    <div class="group-start" id="info-start">Начало учебного года: 01.09.2025</div>
+                </div>
+
+                <div class="group-info-side" id="info-side-actions">
+                    <a id="download-pdf-btn" class="side-action-btn" href="#" download>
+                        <span class="side-action-icon">📄</span>
+                        <span>Скачать PDF</span>
+                    </a>
+
+                    <a id="staff-profile-btn" class="side-action-btn hidden" href="#" target="_blank" rel="noopener noreferrer">
+                        <span class="side-action-icon">👤</span>
+                        <span>Профиль на сайте</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="week-banner cosmic-card">
+            <button id="week-prev-banner" class="week-banner-btn" type="button">‹ Предыдущая</button>
+
+            <div class="week-banner-center">
+                <div class="week-banner-number" id="banner-week-number">32 неделя</div>
+                <div class="week-banner-subtitle">Учебная неделя</div>
+            </div>
+
+            <button id="week-next-banner" class="week-banner-btn" type="button">Следующая ›</button>
+        </section>
+
+        <section id="status-block" class="status-block">
+            <div id="loader" class="status-message hidden">Загрузка расписания...</div>
+            <div id="error-message" class="status-message error-message hidden"></div>
+        </section>
+
+        <section id="schedule-container" class="schedule-section"></section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
